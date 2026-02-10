@@ -1,5 +1,7 @@
 package com.cloudparts.cloudparts_pricing.service;
 
-public interface BoschPriceService {
+import java.math.BigDecimal;
 
+public interface BoschPriceService {
+    BigDecimal getNetPrice(String stockCode);
 }

@@ -11,19 +11,21 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class PricingService {
+public class PriceUpdateService {
 
     private final PriceCalculationService priceCalculationService;
 
-    public void applyPrices(List<ProductRow> products) {
+    public void updatePrices(List<ProductRow> products) {
 
         for (ProductRow product : products) {
 
-            // Bosch’tan gelen net fiyat
-            BigDecimal netPrice = product.getPrice();
-            BigDecimal calculatedPrice = priceCalculationService.calculate(netPrice);
+            // Bosch’tan gelen net fiyat (şimdilik MOCK)
+            BigDecimal boschNetPrice = product.getPrice();
 
-            product.setDiscountPrice(calculatedPrice);
+            BigDecimal finalPrice = priceCalculationService.calculate(boschNetPrice);
+
+            product.setPrice(finalPrice);
+            product.setDiscountPrice(finalPrice);
         }
     }
 }
